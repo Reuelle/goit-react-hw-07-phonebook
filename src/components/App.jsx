@@ -4,13 +4,13 @@ import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFilter } from '../redux/slice/filter'; // Corrected path
-import { fetchContacts, addContact, deleteContact } from '../redux/operation';
+import { fetchContacts, addContact, deleteContact } from '../redux/operation'; // Corrected path
 import {
   selectFilter,
   selectVisibleContacts,
   selectIsLoading,
   selectError,
-} from '../redux/selector';
+} from '../redux/selector'; // Corrected path
 
 export const App = () => {
   const visibleContacts = useSelector(selectVisibleContacts);
