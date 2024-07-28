@@ -3,14 +3,14 @@ import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilter } from 'redux/filterSlice';
-import { fetchContacts, addContact, deleteContact } from 'redux/operation';
+import { setFilter } from '../redux/slice/filter';
+import { fetchContacts, addContact, deleteContact } from '../redux/operation';
 import {
   selectFilter,
   selectVisibleContacts,
   selectIsLoading,
   selectError,
-} from 'redux/selectors';
+} from '../redux/selector';
 
 export const App = () => {
   const visibleContacts = useSelector(selectVisibleContacts);
@@ -19,7 +19,6 @@ export const App = () => {
   const error = useSelector(selectError);
 
   const dispatch = useDispatch();
-
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
@@ -51,7 +50,7 @@ export const App = () => {
       <h2>Contacts</h2>
       <Filter value={filter} onChange={e => dispatch(setFilter(e.target.value))} />
       {isLoading && <p>Loading...</p>}
-      {error && <p>{error}</p>}
+      {error && <p>Error: {error}</p>}
       <ContactList contacts={visibleContacts} onDeleteContact={handleDeleteContact} />
     </div>
   );
