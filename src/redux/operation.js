@@ -1,44 +1,57 @@
-import axios from 'axios';
+
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-axios.defaults.baseURL = 'https://65f11210da8c6584131ccbf1.mockapi.io/api';
-
 
 export const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
-  async (_, thunkAPI) => {
+  async (_, { rejectWithValue }) => {
     try {
-      
-      const response = await axios.get('/contacts');
-      return response.data;
+      const response = await fetch('/api/contacts'); // Replace with your API endpoint
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to fetch contacts');
+      }
+      return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
 
 export const addContact = createAsyncThunk(
   'contacts/addContact',
-  async (contactData, thunkAPI) => {
+  async (newContact, { rejectWithValue }) => {
     try {
-      const response = await axios.post('/contacts', contactData);
-      return response.data;
+      const response = await fetch('/api/contacts', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newContact),
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Failed to add contact');
+      }
+      return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message); 
+      return rejectWithValue(error.message);
     }
   }
 );
 
-
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
-  async (contactId, thunkAPI) => {
+  async (contactId, { rejectWithValue }) => {
     try {
-      
-      await axios.delete(`/contacts/${contactId}`);
-      return contactId; 
+      const response = await fetch(`/api/contacts/${contactId}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete contact');
+      }
+      return contactId;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message); 
+      return rejectWithValue(error.message);
     }
   }
 );
