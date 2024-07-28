@@ -2,8 +2,37 @@ import React from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
+import { useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { setFilter } from 'redux/filterSlice';
+import { fetchContacts, addContact, deleteContact } from 'redux/operations';
+import {
+  selectFilter,
+  selectVisibleContacts,
+  selectIsLoading,
+  selectError,
+} from 'redux/selectors';
 
 export const App = () => {
+   const visibleContacts = useSelector(selectVisibleContacts);
+  const filter = useSelector(selectFilter);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  const handleAddContact = newContact => {
+       dispatch(addContact(newContact));
+  };
+
+  const handleDeleteContact = id => {
+       dispatch(addContact(newContact));
+  };
+
+  const handleDeleteContact = id => {
   return (
     <div
       style={{
