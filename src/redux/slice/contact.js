@@ -1,9 +1,10 @@
+// src/redux/slice/contact.js
+
 import { createSlice } from '@reduxjs/toolkit';
 import { fetchContacts, addContact, deleteContact } from './operation';
 
 const initialContactsState = {
   contacts: [],
-
   isLoading: false,
   error: null,
 };
@@ -11,16 +12,7 @@ const initialContactsState = {
 export const contactsSlice = createSlice({
   name: 'contacts',
   initialState: initialContactsState,
-
-  
-
-  reducers: {
-  
-   
-    
-   
-  },
-
+  reducers: {},
   extraReducers: builder => {
     builder
       .addCase(fetchContacts.pending, state => {
@@ -63,3 +55,5 @@ export const contactsSlice = createSlice({
       });
   },
 });
+
+export const contactsReducer = contactsSlice.reducer;
