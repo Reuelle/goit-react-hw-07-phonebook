@@ -10,7 +10,7 @@ import {
   selectVisibleContacts,
   selectIsLoading,
   selectError,
-} from '../redux/selector'; // Corrected path
+} from '../redux/selector';
 
 export const App = () => {
   const visibleContacts = useSelector(selectVisibleContacts);
