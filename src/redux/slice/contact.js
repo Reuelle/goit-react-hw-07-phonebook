@@ -55,4 +55,4 @@ export const contactsSlice = createSlice({
 });
 
 export const contactsReducer = contactsSlice.reducer;
-export { deleteContact };
+export { deleteContact }; // Ensure this export matches your import in the component
