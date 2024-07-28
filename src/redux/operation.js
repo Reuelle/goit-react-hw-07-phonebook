@@ -5,7 +5,7 @@ export const fetchContacts = createAsyncThunk(
   'contacts/fetchContacts',
   async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch('/api/contacts'); // Replace with your API endpoint
+      const response = await fetch('https://65f11210da8c6584131ccbf1.mockapi.io/api/contacts'); 
       const data = await response.json();
       if (!response.ok) {
         throw new Error(data.message || 'Failed to fetch contacts');
