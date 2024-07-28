@@ -5,7 +5,7 @@ import { ContactList } from './ContactList/ContactList';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { setFilter } from 'redux/filterSlice';
-import { fetchContacts, addContact, deleteContact } from 'redux/operations';
+import { fetchContacts, addContact, deleteContact } from 'redux/operation';
 import {
   selectFilter,
   selectVisibleContacts,
