@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts, addContact, deleteContact } from './operation'; // Corrected path
+import { fetchContacts, addContact, deleteContact } from './operation'; // Ensure this path is correct
 
 const initialContactsState = {
   contacts: [],
