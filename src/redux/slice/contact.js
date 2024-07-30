@@ -1,8 +1,9 @@
+// redux/slice/contact.js
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchContacts, addContact, deleteContact } from '../operation'; // Correct import path
+import { fetchContacts, addContact, deleteContact } from '../operation';
 
 const initialContactsState = {
-  contacts: [],
+  items: [],
   isLoading: false,
   error: null,
 };
@@ -19,7 +20,7 @@ export const contactsSlice = createSlice({
       .addCase(fetchContacts.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.contacts = action.payload;
+        state.items = action.payload;
       })
       .addCase(fetchContacts.rejected, (state, action) => {
         state.isLoading = false;
@@ -31,7 +32,7 @@ export const contactsSlice = createSlice({
       .addCase(addContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.contacts.push(action.payload);
+        state.items.push(action.payload);
       })
       .addCase(addContact.rejected, (state, action) => {
         state.isLoading = false;
@@ -43,7 +44,7 @@ export const contactsSlice = createSlice({
       .addCase(deleteContact.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
-        state.contacts = state.contacts.filter(
+        state.items = state.items.filter(
           contact => contact.id !== action.payload
         );
       })
@@ -54,5 +55,5 @@ export const contactsSlice = createSlice({
   },
 });
 
-export const contactsReducer = contactsSlice.reducer;
-export { deleteContact }; // Ensure this export matches your import in the component
+export const { reducer: contactsReducer } = contactsSlice;
+export { addContact, deleteContact };
