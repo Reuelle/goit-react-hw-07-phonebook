@@ -12,7 +12,7 @@ export const App = () => {
         alignItems: 'center',
         fontSize: 20,
         color: '#010101',
-        backgroundColor: 'rgb(248, 246, 247)',
+        backgroundColor: 'rgb(255, 0, 0)',
         minHeight: '100vh',
         padding: '1rem',
       }}
