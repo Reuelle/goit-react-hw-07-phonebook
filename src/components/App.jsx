@@ -1,16 +1,13 @@
-
 import React, { useEffect } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilter } from 'redux/slice/filter';
 import { fetchContacts, addContact, deleteContact } from 'redux/operation';
-import { selectFilter, selectVisibleContacts, selectIsLoading, selectError } from 'redux/selector';
+import { selectVisibleContacts, selectIsLoading, selectError } from 'redux/selector';
 
 export const App = () => {
   const visibleContacts = useSelector(selectVisibleContacts);
-  const filter = useSelector(selectFilter);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
@@ -44,7 +41,7 @@ export const App = () => {
     >
       <h1>Phonebook</h1>
       <ContactForm onAddContact={handleAddContact} />
-      <h2> Contacts</h2>
+      <h2>Contacts</h2>
       <Filter />
       <ContactList contacts={visibleContacts} onDeleteContact={handleDeleteContact} />
       {isLoading && <p>Loading...</p>}
