@@ -1,12 +1,11 @@
-import PropTypes from 'prop-types';
 import { useDispatch, useSelector } from 'react-redux';
-import css from './ContactForm.module.css';
 import { addContact } from 'redux/slice/contact';
-import { getContacts } from 'redux/selector';
+import { selectContacts } from 'redux/selector';
+import css from './ContactForm.module.css';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(getContacts);
+  const contacts = useSelector(selectContacts);
 
   const handleSubmit = e => {
     e.preventDefault();
@@ -14,15 +13,12 @@ export const ContactForm = () => {
     const name = form.elements.name.value;
     const number = form.elements.number.value;
     form.reset();
-
-    // Check for duplicate contacts
-    if (contacts.some(contact => contact.name === name)) {
+    if (contacts.find(contact => contact.name === name)) {
       alert(`${name} is already in contacts`);
-      return;
+      return false;
     }
-
-    // Dispatch addContact action
     dispatch(addContact({ name, number }));
+    return true;
   };
 
   return (
@@ -53,11 +49,3 @@ export const ContactForm = () => {
     </form>
   );
 };
-
-// Since no props are used, remove PropTypes
-// ContactForm.propTypes = {
-//   contacts: PropTypes.arrayOf(PropTypes.shape({
-//     name: PropTypes.string.isRequired,
-//     number: PropTypes.string.isRequired,
-//   })),
-// };
