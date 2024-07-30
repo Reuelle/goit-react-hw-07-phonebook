@@ -14,12 +14,15 @@ export const ContactForm = () => {
     const name = form.elements.name.value;
     const number = form.elements.number.value;
     form.reset();
-    if (contacts.value.find(contact => contact.name === name)) {
+
+    // Check for duplicate contacts
+    if (contacts.some(contact => contact.name === name)) {
       alert(`${name} is already in contacts`);
-      return false;
+      return;
     }
-    dispatch(addContact(name, number));
-    return true;
+
+    // Dispatch addContact action
+    dispatch(addContact({ name, number }));
   };
 
   return (
@@ -51,5 +54,10 @@ export const ContactForm = () => {
   );
 };
 
-ContactForm.propTypes = {
-  contacts: PropTypes.object,
+// Since no props are used, remove PropTypes
+// ContactForm.propTypes = {
+//   contacts: PropTypes.arrayOf(PropTypes.shape({
+//     name: PropTypes.string.isRequired,
+//     number: PropTypes.string.isRequired,
+//   })),
+// };
