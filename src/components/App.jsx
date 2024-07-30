@@ -1,16 +1,12 @@
+// src/components/App.jsx
 import React, { useEffect } from 'react';
 import { ContactForm } from './ContactForm/ContactForm';
 import { Filter } from './Filter/Filter';
 import { ContactList } from './ContactList/ContactList';
 import { useSelector, useDispatch } from 'react-redux';
-import { setFilter } from '../redux/slice/filter'; // Corrected path
-import { fetchContacts, addContact, deleteContact } from '../redux/operation'; // Corrected path
-import {
-  selectFilter,
-  selectVisibleContacts,
-  selectIsLoading,
-  selectError,
-} from '../redux/selector';
+import { setFilter } from 'redux/slice/filter';
+import { fetchContacts, addContact, deleteContact } from 'redux/operation';
+import { selectFilter, selectVisibleContacts, selectIsLoading, selectError } from 'redux/selector';
 
 export const App = () => {
   const visibleContacts = useSelector(selectVisibleContacts);
@@ -19,6 +15,7 @@ export const App = () => {
   const error = useSelector(selectError);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
@@ -47,11 +44,11 @@ export const App = () => {
     >
       <h1>Phonebook</h1>
       <ContactForm onAddContact={handleAddContact} />
-      <h2>Contacts</h2>
-      <Filter value={filter} onChange={e => dispatch(setFilter(e.target.value))} />
-      {isLoading && <p>Loading...</p>}
-      {error && <p>Error: {error}</p>}
+      <h2> Contacts</h2>
+      <Filter />
       <ContactList contacts={visibleContacts} onDeleteContact={handleDeleteContact} />
+      {isLoading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
     </div>
   );
 };
