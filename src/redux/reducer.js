@@ -1,5 +1,5 @@
 import { createReducer } from '@reduxjs/toolkit';
-import { addContact, deleteContact, setFilter } from './action';
+import { addContact, deleteContact, setFilter } from './slice/action';
 
 // Initial states
 const initialContactsState = [
